@@ -36,7 +36,7 @@ pipeline {
                     // Test Docker image for vulnerabilities
                     withCredentials([string(credentialsId: 'snyk-token', variable: 'SNYK_TOKEN')]) {
                         sh 'snyk auth ${SNYK_TOKEN}'
-                        sh 'snyk container test ${APP_IMAGE_NAME}:latest'                        
+                        sh 'snyk container test ${APP_IMAGE_NAME}:latest --policy-path=.snyk'                        
                 }
            }
         }
