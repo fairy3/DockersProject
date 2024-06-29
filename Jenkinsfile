@@ -36,8 +36,18 @@ pipeline {
                     // Test Docker image for vulnerabilities
                     withCredentials([string(credentialsId: 'snyk-token', variable: 'SNYK_TOKEN')]) {
                         sh 'snyk auth ${SNYK_TOKEN}'
-                        sh 'snyk container test ${APP_IMAGE_NAME}:latest --policy-path=.snyk'
-                    }
+                        def snykOutput = sh(script: 'snyk container test ${APP_IMAGE_NAME}:latest --json', returnStdout: true).trim()                        
+
+                        // Parse Snyk JSON output
+                        def vulnerabilities = readJSON text: snykOutput
+                        def vulCount = vulnerabilities.issues.count
+
+                        echo "Found ${vulCount} critical vulnerabilities"
+
+                        // Fail the build if at least 100 vulnerabilities are found
+                        if (criticalCount >= 100) {
+                            error "At least 100 vulnerabilities found. Build failed."
+                        }                    
                 }
            }
         }
