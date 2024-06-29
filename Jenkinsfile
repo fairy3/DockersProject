@@ -12,6 +12,8 @@ pipeline {
         APP_IMAGE_NAME = 'python-app-image'
         WEB_IMAGE_NAME = 'web-image'
         DOCKER_COMPOSE_FILE = 'docker-compose.yml'
+        BUILD_DATE = new Date().format('yyyyMMdd-HHmmss')
+        IMAGE_TAG = "v1.0.0-${BUILD_NUMBER}-${BUILD_DATE}"
     }
 
     stages {
@@ -33,10 +35,10 @@ pipeline {
                 [usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASS')]){
                sh '''
                   docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASS}
-                  docker tag ${APP_IMAGE_NAME}:latest ${DOCKER_USERNAME}/${APP_IMAGE_NAME}:${BUILD_NUMBER}
-                  docker push ${DOCKER_USERNAME}/${APP_IMAGE_NAME}:${BUILD_NUMBER}
-                  docker tag ${WEB_IMAGE_NAME}:latest ${DOCKER_USERNAME}/${WEB_IMAGE_NAME}:${BUILD_NUMBER}
-                  docker push ${DOCKER_USERNAME}/${WEB_IMAGE_NAME}:${BUILD_NUMBER}
+                  docker tag ${APP_IMAGE_NAME}:latest ${DOCKER_USERNAME}/${APP_IMAGE_NAME}:${IMAGE_TAG}
+                  docker push ${DOCKER_USERNAME}/${APP_IMAGE_NAME}:${IMAGE_TAG}
+                  docker tag ${WEB_IMAGE_NAME}:latest ${DOCKER_USERNAME}/${WEB_IMAGE_NAME}:${IMAGE_TAG}
+                  docker push ${DOCKER_USERNAME}/${WEB_IMAGE_NAME}:${IMAGE_TAG}
                '''
               }
            }
