@@ -40,9 +40,9 @@ pipeline {
 
                         // Parse Snyk JSON output
                         def vulnerabilities = readJSON text: snykOutput
-                        def vulCount = vulnerabilities.issues.count
+                        def ctiticalCount = vulnerabilities.issues.count { it.severity == 'critical'}
 
-                        echo "Found ${vulCount} critical vulnerabilities"
+                        echo "Found ${criticalCount} critical vulnerabilities"
 
                         // Fail the build if at least 100 vulnerabilities are found
                         if (criticalCount >= 100) {
