@@ -9,12 +9,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                // Checkout code from repository
-                checkout scm
-            }
-        }
 
         stage('Build Docker Image') {
             steps {
