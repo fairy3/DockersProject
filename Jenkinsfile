@@ -1,6 +1,12 @@
 pipeline {
     agent any
 
+     options {
+        disableConcurrentBuilds()
+        buildDiscarder(logRotator(daysToKeepStr: '30'))
+        timestamps()
+    }
+
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub') // Jenkins credentials ID
         APP_IMAGE_NAME = 'python-app-image'
