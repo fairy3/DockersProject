@@ -19,26 +19,6 @@ pipeline {
 
     stages {
 
-        stage('Install Dependencies') {
-            steps {
-                script {
-                    // Install project dependencies
-                    sh 'npm install'
-                }
-            }
-        }
-
-        stage('Snyk Security Test') {
-            steps {
-                script {
-                    // Run Snyk security test
-                    withCredentials([string(credentialsId: 'snyk-token', variable: 'SNYK_TOKEN')]) {
-                        sh 'snyk auth ${SNYK_TOKEN}'
-                        sh 'snyk test --all-projects'
-                    }
-                }
-            }
-        }
 
         stage('Build Docker Image') {
             steps {
@@ -49,7 +29,19 @@ pipeline {
             }
         }
 
-        
+
+        stage('Snyk Container Test') {
+            steps {
+                script {
+                    // Test Docker image for vulnerabilities
+                    withCredentials([string(credentialsId: 'snyk-token', variable: 'SNYK_TOKEN')]) {
+                        sh 'snyk auth ${SNYK_TOKEN}'
+                        sh 'snyk container test ${APP_IMAGE_NAME}:latest'
+                    }
+                }
+            }
+        }
+ 
         stage('Tag and push images') {
          steps {
              script {
