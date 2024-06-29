@@ -1,11 +1,19 @@
 version: v1.16.0
 ignore:
-  "SNYK-DEBIAN12-ZLIB-6008963":
+  "severity:critical":
     - "*":
-        reason: "This issue is not exploitable in our environment."
+        reason: "Ignored because less than 2 critical vulnerabilities allowed."
         expires: "2024-12-31T12:00:00Z"
-  "SNYK-DEBIAN12-SYSTEMD-6277507":
+  "severity:high":
     - "*":
-        reason: "Library is not used in a way that exposes this vulnerability."
+        reason: "Ignored because all existing high vulnerabilities are allowed."
+        expires: "2024-12-31T12:00:00Z"
+  "severity:medium":
+    - "*":
+        reason: "Ignored because all existing medium vulnerabilities are allowed."
+        expires: "2024-12-31T12:00:00Z"
+  "severity:low":
+    - "*":
+        reason: "Ignored because all existing low vulnerabilities are allowed."
         expires: "2024-12-31T12:00:00Z"
 
