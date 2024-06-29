@@ -189,3 +189,23 @@ ignore:
     - "*":
         reason: "Ignored because all existing medium vulnerabilities are allowed."
         expires: "2024-12-31T12:00:00Z"
+  SNYK-DEBIAN12-GLIBC-1547373:
+    - "*":
+        reason: "Ignored because all existing medium vulnerabilities are allowed."
+        expires: "2024-12-31T12:00:00Z"
+  SNYK-DEBIAN12-GCC12-2606941:
+    - "*":
+        reason: "Ignored because all existing medium vulnerabilities are allowed."
+        expires: "2024-12-31T12:00:00Z"
+  SNYK-DEBIAN12-GCC12-5901316:
+    - "*":
+        reason: "Ignored because all existing medium vulnerabilities are allowed."
+        expires: "2024-12-31T12:00:00Z"
+  SNYK-DEBIAN12-EXPAT-6227597:
+    - "*":
+        reason: "Ignored because all existing medium vulnerabilities are allowed."
+        expires: "2024-12-31T12:00:00Z"
+  SNYK-DEBIAN12-EXPAT-6227603:
+    - "*":
+        reason: "Ignored because all existing medium vulnerabilities are allowed."
+        expires: "2024-12-31T12:00:00Z"
