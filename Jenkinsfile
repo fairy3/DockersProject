@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub') // Jenkins credentials ID
-        APP_IMAGE_NAME = 'pyton-app-image'
+        APP_IMAGE_NAME = 'python-app-image'
         WEB_IMAGE_NAME = 'web-image'
         DOCKER_COMPOSE_FILE = 'docker-compose.yml'
     }
