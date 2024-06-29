@@ -14,9 +14,22 @@ pipeline {
         DOCKER_COMPOSE_FILE = 'docker-compose.yml'
         BUILD_DATE = new Date().format('yyyyMMdd-HHmmss')
         IMAGE_TAG = "v1.0.0-${BUILD_NUMBER}-${BUILD_DATE}"
+        SNYK_TOKEN = credentials('snyk-token')
     }
 
     stages {
+
+        stage('Snyk Security Test') {
+            steps {
+                script {
+                    // Run Snyk security test
+                    withCredentials([string(credentialsId: 'snyk-token', variable: 'SNYK_TOKEN')]) {
+                        sh 'snyk auth ${SNYK_TOKEN}'
+                        sh 'snyk test --all-projects'
+                    }
+                }
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
@@ -27,9 +40,9 @@ pipeline {
             }
         }
 
-
+        
         stage('Tag and push images') {
-          steps {
+         steps {
              script {
                 withCredentials(
                 [usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASS')]){
