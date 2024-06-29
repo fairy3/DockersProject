@@ -4,8 +4,4 @@ ignore:
     - "*":
         reason: "Ignored because all existing medium vulnerabilities are allowed."
         expires: "2024-12-31T12:00:00Z"
-  SNYK-DEBIAN12-COREUTILS-1543939:
-    - "*":
-        reason: "Ignored because all existing low vulnerabilities are allowed."
-        expires: "2024-12-31T12:00:00Z"
 
