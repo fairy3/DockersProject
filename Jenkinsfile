@@ -27,9 +27,9 @@ pipeline {
                 [usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASS')]){
                sh '''
                   docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASS}
-                  docker tag ${APP_IMAGE_NAME} ${DOCKER_USERNAME}/${APP_IMAGE_NAME}:${BUILD_NUMBER}
+                  docker tag ${APP_IMAGE_NAME}:latest ${DOCKER_USERNAME}/${APP_IMAGE_NAME}:${BUILD_NUMBER}
                   docker push ${DOCKER_USERNAME}/${APP_IMAGE_NAME}:${BUILD_NUMBER}
-                  docker tag ${WEB_IMAGE_NAME} ${DOCKER_USERNAME}/${WEB_IMAGE_NAME}:${BUILD_NUMBER}
+                  docker tag ${WEB_IMAGE_NAME}:latest ${DOCKER_USERNAME}/${WEB_IMAGE_NAME}:${BUILD_NUMBER}
                   docker push ${DOCKER_USERNAME}/${WEB_IMAGE_NAME}:${BUILD_NUMBER}
                '''
               }

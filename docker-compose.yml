@@ -5,7 +5,7 @@ services:
   app:
     build:
       context: ./app
-    image: python-app-image    
+    image: python-app-image:latest    
     ports:
       - "5000:5000"
     networks:
@@ -14,7 +14,7 @@ services:
   web:
     build:
       context: ./web
-    image: web-image    
+    image: web-image:latest    
     ports:
       - "8081:80"
     networks:
