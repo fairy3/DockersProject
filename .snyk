@@ -1,10 +1,10 @@
 version: v1.25.0
 ignore:
-  "severity:medium":
+  SNYK-DEBIAN12-APT-1541449:
     - "*":
         reason: "Ignored because all existing medium vulnerabilities are allowed."
         expires: "2024-12-31T12:00:00Z"
-  "severity:low":
+  SNYK-DEBIAN12-COREUTILS-1543939:
     - "*":
         reason: "Ignored because all existing low vulnerabilities are allowed."
         expires: "2024-12-31T12:00:00Z"
