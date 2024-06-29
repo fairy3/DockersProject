@@ -19,6 +19,15 @@ pipeline {
 
     stages {
 
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    // Install project dependencies
+                    sh 'npm install'
+                }
+            }
+        }
+
         stage('Snyk Security Test') {
             steps {
                 script {
