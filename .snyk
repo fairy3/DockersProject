@@ -1,13 +1,5 @@
 version: v1.25.0
 ignore:
-  "severity:critical":
-    - "*":
-        reason: "Ignored because less than 2 critical vulnerabilities allowed."
-        expires: "2024-12-31T12:00:00Z"
-  "severity:high":
-    - "*":
-        reason: "Ignored because all existing high vulnerabilities are allowed."
-        expires: "2024-12-31T12:00:00Z"
   "severity:medium":
     - "*":
         reason: "Ignored because all existing medium vulnerabilities are allowed."
