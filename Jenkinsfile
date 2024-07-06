@@ -80,8 +80,8 @@ pipeline {
                 sh '''
                     docker tag ${DOCKER_USERNAME}/${APP_IMAGE_NAME}:${IMAGE_TAG} ${APP_IMAGE_NAME}:${IMAGE_TAG}
                     docker.image("${APP_IMAGE_NAME}:${IMAGE_TAG}").push()
-                    docker tag ${DOCKER_USERNAME}/${WEB_IMAGE_NAME}:${IMAGE_TAG} ${WEB_IMAGE_NAME}:${IMAGE_TAG}
-                    docker.image("${WEB_IMAGE_NAME}:${IMAGE_TAG}").push()
+                    //docker tag ${DOCKER_USERNAME}/${WEB_IMAGE_NAME}:${IMAGE_TAG} ${WEB_IMAGE_NAME}:${IMAGE_TAG}
+                    //docker.image("${WEB_IMAGE_NAME}:${IMAGE_TAG}").push()
                  '''
                 }
             }
