@@ -78,8 +78,8 @@ pipeline {
             steps {
                 script {
                 sh '''
-                    docker tag ${WEB_IMAGE_NAME}:latest ${NEXUS_URL}${WEB_IMAGE_NAME}:${IMAGE_TAG}
-                    docker push ${NEXUS_URL}${WEB_IMAGE_NAME}:${IMAGE_TAG}
+                    docker tag ${WEB_IMAGE_NAME}:latest ${NEXUS_URL}/${WEB_IMAGE_NAME}:${IMAGE_TAG}
+                    docker push ${NEXUS_URL}/${WEB_IMAGE_NAME}:${IMAGE_TAG}
                  '''
                 }
             }
