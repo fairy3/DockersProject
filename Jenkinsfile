@@ -15,6 +15,9 @@ pipeline {
         BUILD_DATE = new Date().format('yyyyMMdd-HHmmss')
         IMAGE_TAG = "v1.0.0-${BUILD_NUMBER}-${BUILD_DATE}"
         SNYK_TOKEN = credentials('snyk-token')
+        NEXUS_URL = "http://172.24.216.163:8888"
+        NEXUS_REPOSITORY = "my-docker-repo"
+        NEXUS_CREDENTIALS_ID = "nexus"
     }
 
     stages {
@@ -58,6 +61,28 @@ pipeline {
            }
         }
       }
+
+
+      stage('Login to Nexus Repository') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: "${NEXUS_CREDENTIALS_ID}", passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+                        sh "docker login -u ${USERNAME} -p ${PASSWORD} http://${NEXUS_URL}/repository/${NEXUS_REPOSITORY}"
+                    }
+                }
+            }
+      }
+
+      stage('Push To Nexus') {
+            steps {
+                script {
+                    docker tag ${APP_IMAGE_NAME}:latest ${APP_IMAGE_NAME}:${IMAGE_TAG}
+                    docker.image("${APP_IMAGE_NAME}:${IMAGE_TAG}").push()
+                    docker tag ${WEB_IMAGE_NAME}:latest ${WEB_IMAGE_NAME}:${IMAGE_TAG}
+                    docker.image("${WEB_IMAGE_NAME}:${IMAGE_TAG}").push()
+                }
+            }
+        }
     }
 
 
