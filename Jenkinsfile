@@ -16,7 +16,7 @@ pipeline {
         IMAGE_TAG = "v1.0.0-${BUILD_NUMBER}-${BUILD_DATE}"
         SNYK_TOKEN = credentials('snyk-token')
         NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "172.24.216.163:8888"
+        NEXUS_URL = "172.24.216.163:8081"
         NEXUS_REPOSITORY = "my-docker-repo"
         NEXUS_CREDENTIALS_ID = "nexus"
     }
