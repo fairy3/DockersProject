@@ -76,9 +76,9 @@ pipeline {
       stage('Tag and Push To Nexus') {
             steps {
                 script {
-                    docker tag ${APP_IMAGE_NAME}:latest ${APP_IMAGE_NAME}:${IMAGE_TAG}
+                    docker tag ${DOCKER_USERNAME}/${APP_IMAGE_NAME}:${IMAGE_TAG} ${APP_IMAGE_NAME}:${IMAGE_TAG}
                     docker.image("${APP_IMAGE_NAME}:${IMAGE_TAG}").push()
-                    docker tag ${WEB_IMAGE_NAME}:latest ${WEB_IMAGE_NAME}:${IMAGE_TAG}
+                    docker tag ${DOCKER_USERNAME}/${WEB_IMAGE_NAME}:${IMAGE_TAG} ${WEB_IMAGE_NAME}:${IMAGE_TAG}
                     docker.image("${WEB_IMAGE_NAME}:${IMAGE_TAG}").push()
                 }
             }
