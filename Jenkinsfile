@@ -78,8 +78,8 @@ pipeline {
             steps {
                 script {
                 sh '''
-                    docker tag ${APP_IMAGE_NAME}:latest ${APP_IMAGE_NAME}:${IMAGE_TAG}
-                    docker push ${APP_IMAGE_NAME}:${IMAGE_TAG}
+                    //docker tag ${APP_IMAGE_NAME}:latest ${APP_IMAGE_NAME}:${IMAGE_TAG}
+                    //docker push ${APP_IMAGE_NAME}:${IMAGE_TAG}
                     docker tag ${WEB_IMAGE_NAME}:latest ${WEB_IMAGE_NAME}:${IMAGE_TAG}
                     docker push ${WEB_IMAGE_NAME}:${IMAGE_TAG}
                     //docker tag ${DOCKER_USERNAME}/${APP_IMAGE_NAME}:${IMAGE_TAG} ${APP_IMAGE_NAME}:${IMAGE_TAG}
