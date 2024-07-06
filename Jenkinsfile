@@ -73,7 +73,7 @@ pipeline {
             }
       }
 
-      stage('Push To Nexus') {
+      stage('Tag and Push To Nexus') {
             steps {
                 script {
                     docker tag ${APP_IMAGE_NAME}:latest ${APP_IMAGE_NAME}:${IMAGE_TAG}
