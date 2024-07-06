@@ -46,22 +46,22 @@ pipeline {
         }
        }        
  
-        stage('Tag and push images') {
-         steps {
-             script {
-                withCredentials(
-                [usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASS')]){
-               sh '''
-                  docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASS}
-                  docker tag ${APP_IMAGE_NAME}:latest ${DOCKER_USERNAME}/${APP_IMAGE_NAME}:${IMAGE_TAG}
-                  docker push ${DOCKER_USERNAME}/${APP_IMAGE_NAME}:${IMAGE_TAG}
-                  docker tag ${WEB_IMAGE_NAME}:latest ${DOCKER_USERNAME}/${WEB_IMAGE_NAME}:${IMAGE_TAG}
-                  docker push ${DOCKER_USERNAME}/${WEB_IMAGE_NAME}:${IMAGE_TAG}
-               '''
-              }
-           }
-        }
-      }
+       // stage('Tag and push images') {
+       //  steps {
+       //      script {
+       //         withCredentials(
+       //         [usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASS')]){
+       //        sh '''
+       //           docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASS}
+       //           docker tag ${APP_IMAGE_NAME}:latest ${DOCKER_USERNAME}/${APP_IMAGE_NAME}:${IMAGE_TAG}
+       //           docker push ${DOCKER_USERNAME}/${APP_IMAGE_NAME}:${IMAGE_TAG}
+       //           docker tag ${WEB_IMAGE_NAME}:latest ${DOCKER_USERNAME}/${WEB_IMAGE_NAME}:${IMAGE_TAG}
+       //           docker push ${DOCKER_USERNAME}/${WEB_IMAGE_NAME}:${IMAGE_TAG}
+       //        '''
+       //       }
+       //    }
+       // }
+      //}
 
 
       stage('Login to Nexus Repository') {
@@ -78,8 +78,12 @@ pipeline {
             steps {
                 script {
                 sh '''
-                    docker tag ${DOCKER_USERNAME}/${APP_IMAGE_NAME}:${IMAGE_TAG} ${APP_IMAGE_NAME}:${IMAGE_TAG}
-                    docker.image("${APP_IMAGE_NAME}:${IMAGE_TAG}").push()
+                    docker tag ${APP_IMAGE_NAME}:latest ${APP_IMAGE_NAME}:${IMAGE_TAG}
+                    docker push ${APP_IMAGE_NAME}:${IMAGE_TAG}
+                    docker tag ${WEB_IMAGE_NAME}:latest ${WEB_IMAGE_NAME}:${IMAGE_TAG}
+                    docker push ${WEB_IMAGE_NAME}:${IMAGE_TAG}
+                    //docker tag ${DOCKER_USERNAME}/${APP_IMAGE_NAME}:${IMAGE_TAG} ${APP_IMAGE_NAME}:${IMAGE_TAG}
+                    //docker.image("${APP_IMAGE_NAME}:${IMAGE_TAG}").push()
                     //docker tag ${DOCKER_USERNAME}/${WEB_IMAGE_NAME}:${IMAGE_TAG} ${WEB_IMAGE_NAME}:${IMAGE_TAG}
                     //docker.image("${WEB_IMAGE_NAME}:${IMAGE_TAG}").push()
                  '''
