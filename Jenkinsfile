@@ -15,7 +15,7 @@ pipeline {
         BUILD_DATE = new Date().format('yyyyMMdd-HHmmss')
         IMAGE_TAG = "v1.0.0-${BUILD_NUMBER}-${BUILD_DATE}"
         SNYK_TOKEN = credentials('snyk-token')
-        NEXUS_URL = "http://172.24.216.163:8888"
+        NEXUS_URL = "http://172.24.216.163:8081"
         NEXUS_REPOSITORY = "my-docker-repo"
         NEXUS_CREDENTIALS_ID = "nexus"
     }
@@ -77,10 +77,10 @@ pipeline {
             steps {
                 script {
                 sh '''
-                    docker tag ${APP_IMAGE_NAME}:latest ${APP_IMAGE_NAME}:${IMAGE_TAG}
+                    docker tag ${DOCKER_USERNAME}/${APP_IMAGE_NAME}:${IMAGE_TAG} ${APP_IMAGE_NAME}:${IMAGE_TAG}
                     docker.image("${APP_IMAGE_NAME}:${IMAGE_TAG}").push()
-                    //docker tag ${DOCKER_USERNAME}/${WEB_IMAGE_NAME}:${IMAGE_TAG} ${WEB_IMAGE_NAME}:${IMAGE_TAG}
-                    //docker.image("${WEB_IMAGE_NAME}:${IMAGE_TAG}").push()
+                    docker tag ${DOCKER_USERNAME}/${WEB_IMAGE_NAME}:${IMAGE_TAG} ${WEB_IMAGE_NAME}:${IMAGE_TAG}
+                    docker.image("${WEB_IMAGE_NAME}:${IMAGE_TAG}").push()
                  '''
                 }
             }
