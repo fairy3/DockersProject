@@ -46,23 +46,6 @@ pipeline {
         }
        }        
  
-       // stage('Tag and push images') {
-       //  steps {
-       //      script {
-       //         withCredentials(
-       //         [usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASS')]){
-       //        sh '''
-       //           docker tag ${APP_IMAGE_NAME}:latest ${DOCKER_USERNAME}/${APP_IMAGE_NAME}:${IMAGE_TAG}
-       //           docker push ${DOCKER_USERNAME}/${APP_IMAGE_NAME}:${IMAGE_TAG}
-       //           docker tag ${WEB_IMAGE_NAME}:latest ${DOCKER_USERNAME}/${WEB_IMAGE_NAME}:${IMAGE_TAG}
-       //           docker push ${DOCKER_USERNAME}/${WEB_IMAGE_NAME}:${IMAGE_TAG}
-       //        '''
-       //       }
-       //    }
-       // }
-      //}
-
-
       stage('Login to Nexus Repository') {
             steps {
                 script {
