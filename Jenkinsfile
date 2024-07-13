@@ -1,3 +1,4 @@
+@Library(my-shared-library) _
 pipeline {
     agent any
 
@@ -22,8 +23,12 @@ pipeline {
     }
 
     stages {
-
-
+        stage('Hello') {
+           steps {
+              greet(${USERNAME})
+           }
+        }
+        
         stage('Build Docker Image') {
             steps {
                 script {
@@ -33,7 +38,6 @@ pipeline {
             }
         }
 
-
         stage('Snyk Container Test') {
             steps {
                 script {
@@ -41,9 +45,9 @@ pipeline {
                     withCredentials([string(credentialsId: 'snyk-token', variable: 'SNYK_TOKEN')]) {
                         sh 'snyk auth ${SNYK_TOKEN}'
                         sh 'snyk container test ${APP_IMAGE_NAME}:latest --policy-path=.snyk'                        
-                }
+                   }
+               }
            }
-        }
        }        
  
       stage('Login to Nexus Repository') {
@@ -67,9 +71,8 @@ pipeline {
                  '''
                 }
             }
-        }
+      }
     }
-
 
     post {
         always {
