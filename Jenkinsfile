@@ -44,7 +44,7 @@ pipeline {
                 // Ensure Python requirements are installed
                 sh 'pip3 install pytest'
                 // Run pytest for unit tests
-                sh 'python3 -m pytest --junitxml=results.xml tests/*.py'
+                sh 'python3 -m pytest --junitxml=results.xml app/tests/*.py'
             }
             post {
                 always {
