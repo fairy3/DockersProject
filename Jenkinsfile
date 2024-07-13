@@ -40,7 +40,7 @@ pipeline {
 
         stage('Snyk login') {
             steps {
-                snykLogin(${SNYK_TOKEN})
+                snykLogin('${SNYK_TOKEN}')
             }
         }
         stage('Snyk Container Test') {
