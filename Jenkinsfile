@@ -42,7 +42,7 @@ pipeline {
         stage('Unit Test') {
             steps {
                 echo "Running unittests"
-                //sh 'pytest tests/'
+                sh 'pytest app/tests/'
             }
         }
 
@@ -98,6 +98,19 @@ pipeline {
         always {
             // Clean up the workspace!
             cleanWs()
+        }
+
+        success {
+            // Actions that should run only if the pipeline succeeds, e.g., notifications
+            mail to: 'team@example.com',
+                 subject: "Pipeline Success: ${currentBuild.fullDisplayName}",
+                 body: "Good news! The pipeline has succeeded."
+        }
+        failure {
+            // Actions that should run only if the pipeline fails, e.g., notifications
+            mail to: 'team@example.com',
+                 subject: "Pipeline Failure: ${currentBuild.fullDisplayName}",
+                 body: "Unfortunately, the pipeline has failed. Please check the logs."
         }
     }
 }
