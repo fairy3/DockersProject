@@ -24,8 +24,8 @@ pipeline {
 
     stages {
         stage('Hello') {
-        //using build id
            steps {
+              echo "Full name: $BUILD_USER"
               greet()
            }
         }
