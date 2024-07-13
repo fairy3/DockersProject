@@ -56,8 +56,9 @@ pipeline {
 
        stage('Nexus login') {
             steps {
-                withCredentials([usernamePassword(credentialsId: "${NEXUS_CREDENTIALS_ID}", passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-                    nexusLogin('${USERNAME}', '${PASSWORD}', '${NEXUS_PROTOCOL}', '${NEXUS_URL}', '${NEXUS_REPOSITORY}')
+                //withCredentials([usernamePassword(credentialsId: "${NEXUS_CREDENTIALS_ID}", passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+                //    nexusLogin('${USERNAME}', '${PASSWORD}', '${NEXUS_PROTOCOL}', '${NEXUS_URL}', '${NEXUS_REPOSITORY}')
+                nexusLogin('${NEXUS_CREDENTIALS_ID}','${NEXUS_PROTOCOL}','${NEXUS_URL}', '${NEXUS_REPOSITORY}')
                }
             }
        }
