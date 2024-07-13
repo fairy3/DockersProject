@@ -24,7 +24,6 @@ pipeline {
 
     stages {
         stage('Hello') {
-        //special
            steps {
               greet()
            }
