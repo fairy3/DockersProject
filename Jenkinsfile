@@ -25,6 +25,7 @@ pipeline {
     stages {
         stage('Hello') {
            steps {
+           //using build id
               greet()
            }
         }
