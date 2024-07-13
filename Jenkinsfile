@@ -108,14 +108,14 @@ pipeline {
         }
         success {
             // send notification about succeded build
-            echo 'Build ${BUILD_NUMBER} has succeeded'
+            echo "Build ${BUILD_NUMBER} has succeeded"
             //mail to: 'team@example.com',
             //     subject: "Pipeline Success: ${currentBuild.fullDisplayName}",
             //     body: "Good news! The pipeline has succeeded."
         }
         failure {
             // send notification about failed build
-            echo 'Build ${BUILD_NUMBER} has failed'
+            echo "Build ${BUILD_NUMBER} has failed"
             //mail to: 'team@example.com',
             //     subject: "Pipeline Failure: ${currentBuild.fullDisplayName}",
             //     body: "Unfortunately, the pipeline has failed. Please check the logs."
