@@ -38,12 +38,17 @@ pipeline {
             }
         }
 
+        stage('Snyk login') {
+            steps {
+                snykLogin(${SNYK_TOKEN})
+            }
+        }
         stage('Snyk Container Test') {
             steps {
                 script {
                     // Test Docker image for vulnerabilities
                     withCredentials([string(credentialsId: 'snyk-token', variable: 'SNYK_TOKEN')]) {
-                        sh 'snyk auth ${SNYK_TOKEN}'
+                        //sh 'snyk auth ${SNYK_TOKEN}'
                         sh 'snyk container test ${APP_IMAGE_NAME}:latest --policy-path=.snyk'                        
                    }
                }
