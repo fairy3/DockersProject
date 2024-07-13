@@ -60,6 +60,7 @@ pipeline {
                 nexusLogin('${NEXUS_CREDENTIALS_ID}','${NEXUS_PROTOCOL}','${NEXUS_URL}', '${NEXUS_REPOSITORY}')
             }
        }
+       
       //stage('Login to Nexus Repository') {
       //      steps {
       //          script {
