@@ -25,7 +25,7 @@ pipeline {
     stages {
         stage('Hello') {
            steps {
-              echo " Debug Full name: $BUILD_USER_ID"
+              echo " Debug build user name: BUILD_USER_FIRST_NAME"
               greet()
            }
         }
