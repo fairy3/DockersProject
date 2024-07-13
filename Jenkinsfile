@@ -35,7 +35,7 @@ pipeline {
            steps {
 
             wrap([$class: 'BuildUser']) {
-              echo " Debug build user name: ${BUILD_USER}, ${BUILD_USER_FIRST_NAME}, ${BUILD_USER_LAST_NAME}, ${BUILD_USER_ID}"
+              echo " Debug build user name: $BUILD_USER, $BUILD_USER_FIRST_NAME, $BUILD_USER_LAST_NAME, $BUILD_USER_ID"
               greet()
               }
            }
