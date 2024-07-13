@@ -1,4 +1,4 @@
-@Library(my-shared-library) _
+@Library("my-shared-library") _
 pipeline {
     agent any
 
@@ -28,7 +28,7 @@ pipeline {
               greet(${USERNAME})
            }
         }
-        
+
         stage('Build Docker Image') {
             steps {
                 script {
