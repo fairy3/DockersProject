@@ -25,7 +25,7 @@ pipeline {
     stages {
         stage('Hello') {
            steps {
-              greet($BUILD_USER)
+              greet()
            }
         }
 
