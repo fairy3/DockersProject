@@ -15,6 +15,7 @@ pipeline {
         DOCKER_COMPOSE_FILE = 'docker-compose.yml'
         BUILD_DATE = new Date().format('yyyyMMdd-HHmmss')
         IMAGE_TAG = "v1.0.0-${BUILD_NUMBER}-${BUILD_DATE}"
+        BUILD_USER = "1-${BUILD_USER}"
         SNYK_TOKEN = credentials('snyk-token')
         NEXUS_PROTOCOL = "http"
         NEXUS_URL = "172.24.216.163:8888"
@@ -25,7 +26,8 @@ pipeline {
     stages {
         stage('Hello') {
            steps {
-              greet("${BUILD_USER}")
+              echo "DEBUG ${BUILD_USER}"
+              greet()
            }
         }
 
