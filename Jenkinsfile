@@ -48,22 +48,28 @@ pipeline {
                 script {
                     // Test Docker image for vulnerabilities
                     withCredentials([string(credentialsId: 'snyk-token', variable: 'SNYK_TOKEN')]) {
-                        //sh 'snyk auth ${SNYK_TOKEN}'
                         sh 'snyk container test ${APP_IMAGE_NAME}:latest --policy-path=.snyk'                        
                    }
                }
            }
        }        
- 
-      stage('Login to Nexus Repository') {
+
+       stage('Nexus login') {
             steps {
-                script {
-                    withCredentials([usernamePassword(credentialsId: "${NEXUS_CREDENTIALS_ID}", passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-                        sh "docker login -u ${USERNAME} -p ${PASSWORD} ${NEXUS_PROTOCOL}://${NEXUS_URL}/repository/${NEXUS_REPOSITORY}"
-                    }
-                }
+                withCredentials([usernamePassword(credentialsId: "${NEXUS_CREDENTIALS_ID}", passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+                    nexusLogin('${USERNAME}', '${PASSWORD}', '${NEXUS_PROTOCOL}', '${NEXUS_URL}', '${NEXUS_REPOSITORY}')
+               }
             }
-      }
+       }
+      //stage('Login to Nexus Repository') {
+      //      steps {
+      //          script {
+      //              withCredentials([usernamePassword(credentialsId: "${NEXUS_CREDENTIALS_ID}", passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+      //                  sh "docker login -u ${USERNAME} -p ${PASSWORD} ${NEXUS_PROTOCOL}://${NEXUS_URL}/repository/${NEXUS_REPOSITORY}"
+      //              }
+      //          }
+      //      }
+      //}
 
       stage('Tag and Push To Nexus') {
             steps {
