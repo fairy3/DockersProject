@@ -25,7 +25,7 @@ pipeline {
     stages {
         stage('Hello') {
            steps {
-              greet()
+              greet("${BUILD_USER}")
            }
         }
 
@@ -43,13 +43,12 @@ pipeline {
                 snykLogin('${SNYK_TOKEN}')
             }
         }
+
         stage('Snyk Container Test') {
             steps {
                 script {
                     // Test Docker image for vulnerabilities
-                    //withCredentials([string(credentialsId: 'snyk-token', variable: 'SNYK_TOKEN')]) {
-                        sh 'snyk container test ${APP_IMAGE_NAME}:latest --policy-path=.snyk'                        
-                   //}
+                    sh 'snyk container test ${APP_IMAGE_NAME}:latest --policy-path=.snyk'
                }
            }
        }        
