@@ -39,6 +39,20 @@ pipeline {
             }
         }
 
+        stage('Unit Test') {
+            steps {
+                echo "Running unittests"
+                //sh 'pytest tests/'
+            }
+        }
+
+        stage('Lint') {
+            steps {
+                echo "Pylint running"
+                //sh 'pylint src/'
+            }
+        }
+
         stage('Snyk login') {
             steps {
                 snykLogin('${SNYK_TOKEN}')
