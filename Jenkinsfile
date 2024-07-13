@@ -57,7 +57,7 @@ pipeline {
 
        stage('Nexus login') {
             steps {
-                nexusLogin("nexus",'${NEXUS_PROTOCOL}','${NEXUS_URL}', '${NEXUS_REPOSITORY}')
+                nexusLogin('${NEXUS_CREDENTIALS_ID}','${NEXUS_PROTOCOL}','${NEXUS_URL}', '${NEXUS_REPOSITORY}')
             }
        }
 
