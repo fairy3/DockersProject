@@ -26,18 +26,13 @@ pipeline {
         stage ('Init user') {
            steps {
                 wrap([$class: 'BuildUser']) {
-                     echo "BUILD_USER that started this Pipeline: ${BUILD_USER}"
+                     echo "BUILD_USER that started this Pipeline: ${env.BUILD_USER}"
                }
            }
         }
 
         stage('Hello') {
            steps {
-
-              wrap([$class: 'BuildUser']) {
-                def user = env.BUILD_USER_ID
-                echo " Debug build user name: $user"
-            }
 
             wrap([$class: 'BuildUser']) {
               echo " Debug build user name: $user $BUILD_USER, $BUILD_USER_FIRST_NAME, $BUILD_USER_LAST_NAME, $BUILD_USER_ID"
