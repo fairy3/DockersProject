@@ -57,8 +57,8 @@ pipeline {
 
        stage('Nexus login') {
             steps {
-                echo " DEBUG ${NEXUS_CREDENTIALS_ID} '${NEXUS_PROTOCOL}' ${NEXUS_URL} ${NEXUS_REPOSITORY}"
-                nexusLogin('${NEXUS_CREDENTIALS_ID}','${NEXUS_PROTOCOL}','${NEXUS_URL}', '${NEXUS_REPOSITORY}')
+                echo " DEBUG ${NEXUS_CREDENTIALS_ID} ${NEXUS_PROTOCOL} ${NEXUS_URL} ${NEXUS_REPOSITORY}"
+                nexusLogin(${NEXUS_CREDENTIALS_ID},${NEXUS_PROTOCOL},${NEXUS_URL}, ${NEXUS_REPOSITORY})
             }
        }
 
