@@ -39,13 +39,17 @@ pipeline {
             }
         }
 
-        stage('Unit Test') {
+        stage('Unit Tests') {
             steps {
-                echo "Running unittests"
-                sh '''
-                    pip install pytest unittest
-                    python -m pytest --junitxml results.xml /test
-                '''
+                // Ensure Python requirements are installed
+                sh 'pip3 install pytest'
+                // Run pytest for unit tests
+                sh 'python3 -m pytest --junitxml=results.xml tests/*.py'
+            }
+            post {
+                always {
+                    junit allowEmptyResults: true, testResults: 'results.xml'
+                }
             }
         }
 
@@ -101,19 +105,6 @@ pipeline {
         always {
             // Clean up the workspace!
             cleanWs()
-        }
-
-        success {
-            // Actions that should run only if the pipeline succeeds, e.g., notifications
-            mail to: 'team@example.com',
-                 subject: "Pipeline Success: ${currentBuild.fullDisplayName}",
-                 body: "Good news! The pipeline has succeeded."
-        }
-        failure {
-            // Actions that should run only if the pipeline fails, e.g., notifications
-            mail to: 'team@example.com',
-                 subject: "Pipeline Failure: ${currentBuild.fullDisplayName}",
-                 body: "Unfortunately, the pipeline has failed. Please check the logs."
         }
     }
 }
