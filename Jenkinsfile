@@ -42,7 +42,10 @@ pipeline {
         stage('Unit Test') {
             steps {
                 echo "Running unittests"
-                sh 'pytest app/tests/'
+                sh '''
+                    pip install pytest unittest
+                    python -m pytest --junitxml results.xml /test
+                '''
             }
         }
 
