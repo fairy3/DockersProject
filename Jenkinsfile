@@ -25,7 +25,6 @@ pipeline {
     stages {
         stage('Hello') {
            steps {
-           //greeting
               greet()
            }
         }
@@ -57,20 +56,9 @@ pipeline {
 
        stage('Nexus login') {
             steps {
-                echo " DEBUG ${NEXUS_CREDENTIALS_ID} ${NEXUS_PROTOCOL} ${NEXUS_URL} ${NEXUS_REPOSITORY}"
                 nexusLogin("${NEXUS_CREDENTIALS_ID}","${NEXUS_PROTOCOL}","${NEXUS_URL}", "${NEXUS_REPOSITORY}")
             }
        }
-
-      //stage('Login to Nexus Repository') {
-      //      steps {
-      //          script {
-      //              withCredentials([usernamePassword(credentialsId: "${NEXUS_CREDENTIALS_ID}", passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-      //                  sh "docker login -u ${USERNAME} -p ${PASSWORD} ${NEXUS_PROTOCOL}://${NEXUS_URL}/repository/${NEXUS_REPOSITORY}"
-      //              }
-      //          }
-      //      }
-      //}
 
       stage('Tag and Push To Nexus') {
             steps {
