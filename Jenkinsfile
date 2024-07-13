@@ -9,7 +9,6 @@ pipeline {
     }
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub') // Jenkins credentials ID
         APP_IMAGE_NAME = 'python-app-image'
         WEB_IMAGE_NAME = 'web-image'
         DOCKER_COMPOSE_FILE = 'docker-compose.yml'
@@ -23,21 +22,11 @@ pipeline {
     }
 
     stages {
-       // stage ('Init user') {
-       //    steps {
-      //          wrap([$class: 'BuildUser']) {
-      //               echo "BUILD_USER that started this Pipeline: ${env.BUILD_USER}"
-      //         }
-      //     }
-     //   }
-
         stage('Hello') {
            steps {
-
             wrap([$class: 'BuildUser']) {
-             // echo " Debug build user name: $user $BUILD_USER, $BUILD_USER_FIRST_NAME, $BUILD_USER_LAST_NAME, $BUILD_USER_ID"
               greet()
-              }
+            }
            }
         }
 
@@ -83,6 +72,16 @@ pipeline {
                 }
             }
       }
+
+      stage('Deploy') {
+            steps {
+                sh '''
+                  # deploying to k8s cluster...
+
+                    echo "Deploy to k8s cluster"
+                '''
+            }
+        }
     }
 
     post {
