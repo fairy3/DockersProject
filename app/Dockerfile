@@ -2,7 +2,7 @@
 FROM python:3.13.0b1-slim
 
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /polybot 
 
 # Copy the current directory contents into the container at workdir
 COPY . .
