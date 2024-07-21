@@ -30,14 +30,6 @@ pipeline {
            }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    // Build Docker image using docker-compose
-                    sh 'docker-compose -f ${DOCKER_COMPOSE_FILE} build'
-                }
-            }
-        }
 
         stage('Unit Tests') {
             steps {
@@ -57,6 +49,15 @@ pipeline {
             steps {
                 echo "Pylint running"
                 //sh 'pylint src/'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build Docker image using docker-compose
+                    sh 'docker-compose -f ${DOCKER_COMPOSE_FILE} build'
+                }
             }
         }
 
